@@ -1,0 +1,34 @@
+.count_360 {
+    display: block;
+
+    .wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 150px;
+        color: white;
+        font-family: "Orbitron", sans-serif;
+
+        .dash_line {
+            height: 1px;
+            width: 30px;
+            margin: 0 8px;
+            background-color: gray;
+        }
+
+        .number_current,
+        .number_360 {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .number_current {
+            color: #f1bda5;
+
+        }
+
+        .number_360 {
+            color: gray;
+        }
+    }
+}
