@@ -18,6 +18,7 @@ export default function Slider({ setIsSlide }) {
     const [dragging, setDragging] = useState(false);
     const [activeSlide, setActiveSlide] = useState(0);
     const [animatedValue, setAnimatedValue] = useState(0);
+    const [deviceWidth, setDeviceWidth] = useState(0)
     const slidesCount = 6;
     const size = Math.PI * 2 / slidesCount;
 
@@ -47,7 +48,9 @@ export default function Slider({ setIsSlide }) {
         setIsSlide(true);
         if (!dragging) return;
         const x = e.clientX;
-        const diff = (startX - x) / 20;
+        const intesity = deviceWidth < 720 ? 20 : 150;
+        console.log(intesity)
+        const diff = (startX - x) / intesity;
         const newRotation = rotation - diff;
         setRotation(newRotation);
         targetRotation.current = newRotation;
@@ -63,17 +66,6 @@ export default function Slider({ setIsSlide }) {
         updateActiveSlide(finalRotation);
     };
 
-    useFrame(() => {
-        const newRotation = rotation + (targetRotation.current - rotation) * 0.1;
-        setRotation(newRotation);
-        if (!dragging) {
-            updateActiveSlide(newRotation);
-        }
-    });
-
-    const isPlaneVisible = useControls({
-        isPlane: false
-    })
     const animateValue = (start, end, duration) => {
         let startTimestamp = null;
         const step = (timestamp) => {
@@ -86,11 +78,27 @@ export default function Slider({ setIsSlide }) {
         };
         window.requestAnimationFrame(step);
     };
+
+    useEffect(() => {
+        setDeviceWidth(window.innerWidth)
+    }, []);
+
     useEffect(() => {
         const newValue = 60 * (activeSlide + 1);
         animateValue(animatedValue, newValue, 500); // Animate over 500ms
     }, [activeSlide]);
 
+    useFrame(() => {
+        const newRotation = rotation + (targetRotation.current - rotation) * 0.1;
+        setRotation(newRotation);
+        if (!dragging) {
+            updateActiveSlide(newRotation);
+        }
+    });
+
+    const isPlaneVisible = useControls({
+        isPlane: false
+    })
     return (
         <mesh
             position={[1, 0, -2]}
