@@ -47,7 +47,7 @@ export default function Slider({ setIsSlide }) {
         setIsSlide(true);
         if (!dragging) return;
         const x = e.clientX;
-        const diff = (startX - x) / 100;
+        const diff = (startX - x) / 20;
         const newRotation = rotation - diff;
         setRotation(newRotation);
         targetRotation.current = newRotation;
