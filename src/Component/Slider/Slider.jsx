@@ -85,7 +85,7 @@ export default function Slider({ setIsSlide }) {
 
     useEffect(() => {
         const newValue = 60 * (activeSlide + 1);
-        animateValue(animatedValue, newValue, 1000); // Animate over 500ms
+        animateValue(animatedValue, newValue, 500); // Animate over 500ms
     }, [activeSlide]);
 
     useFrame(() => {
