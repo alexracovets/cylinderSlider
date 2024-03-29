@@ -48,7 +48,7 @@ export default function Slider({ setIsSlide }) {
         setIsSlide(true);
         if (!dragging) return;
         const x = e.clientX;
-        const intesity = deviceWidth < 720 ? 20 : 100;
+        const intesity = deviceWidth < 720 ? 20 : 120;
         console.log(intesity)
         const diff = (startX - x) / intesity;
         const newRotation = rotation - diff;
